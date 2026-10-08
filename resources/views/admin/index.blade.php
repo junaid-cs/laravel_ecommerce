@@ -1,3 +1,3 @@
-<x-app-layout>
+<x-admin-layout>
 Admin Dashboard
-</x-app-layout>
+</x-admin-layout>
