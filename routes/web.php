@@ -26,5 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware([AdminAuth::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/brands',[AdminController::class, 'brand'])->name('admin.brands');
+    Route::get('/brand-add',[AdminController::class,'brandAdd'])->name('admin.brand.add');
+    Route::Post('/brand-add',[AdminController::class,'brandStore'])->name('admin.brand.store');
 });
 require __DIR__ . '/auth.php';

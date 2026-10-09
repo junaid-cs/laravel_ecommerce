@@ -10,7 +10,7 @@
                         <h1 class="text-2xl font-bold text-gray-800">Brands</h1>
                         <p class="text-sm text-gray-500">Manage product brands and partners</p>
                     </div>
-                    <a href="brand-add.php" class="bg-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm">
+                    <a href="{{route('admin.brand.add')}}" class="bg-primary hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm">
                         <i class="fa-solid fa-plus"></i> Add New Brand
                     </a>
                 </div>

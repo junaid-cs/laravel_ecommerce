@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
-
+#Fillable =['name','image','slug','status'];
 class Brand extends Model
 {
-    //
+    public $timestamps = false;
+
 }
