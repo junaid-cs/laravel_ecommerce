@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -34,7 +35,9 @@ class AdminController extends Controller
         $brand->status = $request->has('status') ? 1 : 0;
 
         if($request->hasFile('image')){
+            $image =$request->image;
             $imageName = time() . '_' . uniqid(). "." . $request->image->extension();
+            $this->generatethumbnail($image,$imageName,'uploads/brands',124,124);
             $request->image->move(public_path('uploads/brands'),$imageName);
             $brand->image = $imageName;
         }
@@ -43,5 +46,51 @@ class AdminController extends Controller
 
 
     }
+
+  
+
+
+    public function generatethumbnail($image,$imageName,$folder,$width =124,$height=124){
+            $thumbnailpath = public_path($folder.'/thumbnail');
+            if(!file_exists($thumbnailpath)){
+                mkdir($thumbnailpath,0755,true);
+            }
+            image::decode($image)->resize($width,$height)->save($thumbnailpath. '/' . $imageName);
+    }
+
+
+      public function brandEdite($id){
+        
+      $brand = Brand::findorfail($id);
+
+    return view('admin.brands.brandedit',compact('brand'));
+
+    }
+    public function brandUpdate(Request $request,$id){
+       
+
+           $brand = Brand::findorfail($id);
+        $brand->name = $request->name;
+        $brand->slug = $request->slug ? Str::slug($request->slug) : Str::slug($request->slug);
+        $brand->status = $request->has('status') ? 1 : 0;
+
+        if($request->hasFile('image')){
+            if($brand->image){
+                @unlink(public_path('uploads/brands/'.$brand->image));
+                @unlink(public_path('uploads/brands/thumbnail/'.$brand->image));
+                
+            }
+            $image =$request->image;
+            $imageName = time() . '_' . uniqid(). "." . $request->image->extension();
+            $this->generatethumbnail($image,$imageName,'uploads/brands',124,124);
+            $request->image->move(public_path('uploads/brands'),$imageName);
+            $brand->image = $imageName;
+        }
+        $brand->save();
+        return redirect()->route('admin.brands')->with('success','Brands Updated Sucessfully');
+
+
+    }
+
 
 }

@@ -54,7 +54,7 @@
                                     <td class="px-6 py-4 text-sm text-gray-500">{{$brand->id}}</td>
                                     <td class="px-6 py-4">
                                         <div class="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center border">
-                                            <img src="{{asset('uploads/brands')}}/{{$brand->image}}" class="max-w-[30px] max-h-[30px] object-contain" alt="Brand Logo" onerror="this.src='https://placehold.co/40x40?text=B'">
+                                            <img src="{{asset('uploads/brands/thumbnail')}}/{{$brand->image}}" class="max-w-[30px] max-h-[30px] object-contain" alt="Brand Logo" onerror="this.src='https://placehold.co/40x40?text=B'">
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
@@ -75,9 +75,9 @@
                                     </td>
                                     <td class="px-6 py-4 text-right">
                                         <div class="flex items-center justify-end gap-2">
-                                            <button class="w-8 h-8 rounded-full hover:bg-gray-100 text-blue-500 transition flex items-center justify-center" title="Edit">
+                                            <a  href="{{route('admin.brand.edit',$brand->id)}}" class="w-8 h-8 rounded-full hover:bg-gray-100 text-blue-500 transition flex items-center justify-center" title="Edit">
                                                 <i class="fa-solid fa-pen-to-square"></i>
-                                            </button>
+                                            </a>
                                             <button class="w-8 h-8 rounded-full hover:bg-gray-100 text-red-500 transition flex items-center justify-center" onclick="deleteBrand(this, 'Samsung', 101)" title="Delete">
                                                 <i class="fa-solid fa-trash"></i>
                                             </button>
