@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -30,5 +31,8 @@ Route::middleware([AdminAuth::class])->group(function () {
     Route::Post('/brand-add',[AdminController::class,'brandStore'])->name('admin.brand.store');
     Route::get('/brand-edit/{id}',[AdminController::class,'brandEdite'])->name('admin.brand.edit');
     Route::put('/brand-update/{id}',[AdminController::class,'brandUpdate'])->name('admin.brand.update');
+    Route::delete('/brand-delete/{id}',[AdminController::class,'brandDelete'])->name('admin.brand.delete');
+
+    Route::resource('/category',CategoryController::class);
 });
 require __DIR__ . '/auth.php';
